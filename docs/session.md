@@ -6,7 +6,7 @@ The renderer and public-calendar fetcher use only Python's standard library. Eve
 
 The activity panel, *The lights of Arles*, shows the last 90 observed days along the far shore. A day with at least one contribution is a light; its reflection grows with that day's contribution count (scaled to the busiest day of the window, with a 0.6 exponent so quiet days stay visible). Days without contributions stay dark; nothing is invented. The 365-day and 90-day totals are summed over the validated calendar, with the snapshot date visible. These are GitHub contributions, not exclusively commits.
 
-No image paints a full-canvas background: the painting, the labels and the river panel carry their own surfaces, so the profile reads the same in light and dark themes.
+No image paints a full-canvas background: the painting, the labels and the river panel carry their own surfaces, so nothing depends on the page colour. The museum labels have two variants selected by the README's `picture` elements: cream paper on the light theme, and a night-blue panel with a gold fillet on the dark theme, where cream would glare.
 
 `PORTFOLIO_URL` in `scripts/render_session.py` is empty until the portfolio is deployed; once set, the painting becomes a link to it.
 

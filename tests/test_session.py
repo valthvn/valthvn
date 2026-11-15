@@ -10,7 +10,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 import render_session as session
 
 NS = {'s':'http://www.w3.org/2000/svg'}
-ASSETS = ['tableau','activity']+[f'cartel-{i:02d}' for i in range(1,len(session.PROJECTS)+1)]
+ASSETS = ['activity']+[name+suffix for name in session.THEMED for suffix in ('','-dark')]
 
 
 class SessionTests(unittest.TestCase):
@@ -49,13 +49,24 @@ class SessionTests(unittest.TestCase):
     def test_all_readme_assets_and_clickable_labels(self):
         body = (ROOT/'README.md').read_text(encoding='utf-8')
         self.assertEqual(body,session.readme())
-        paths = re.findall(r'src="\./([^"]+)"',body)
+        paths = re.findall(r'(?:src|srcset)="\./([^"]+)"',body)
         self.assertEqual(sorted(paths),sorted(f'assets/session/{name}.svg' for name in ASSETS))
         for path in paths:
             self.assertTrue((ROOT/path).is_file(),path)
         self.assertEqual(body.count('<details>'),2)
         for project in session.PROJECTS:
             self.assertIn('href="https://github.com/valthvn/'+project['repo']+'"',body)
+
+    def test_dark_variants_swap_every_label_colour(self):
+        self.assertEqual(len(session.THEMED),1+len(session.PROJECTS))
+        for name in session.THEMED:
+            light = (ROOT/f'assets/session/{name}.svg').read_text(encoding='utf-8')
+            dark = (ROOT/f'assets/session/{name}-dark.svg').read_text(encoding='utf-8')
+            self.assertIn(session.PAPER,light)
+            for colour in session.DARK:
+                self.assertNotIn(colour,dark)
+            self.assertIn(session.DARK[session.PAPER],dark)
+        self.assertEqual(session.readme().count('prefers-color-scheme: dark'),len(session.THEMED))
 
     def test_no_stale_assets_and_no_full_canvas_background(self):
         self.assertEqual(sorted(p.stem for p in (ROOT/'assets/session').glob('*.svg')),sorted(ASSETS))

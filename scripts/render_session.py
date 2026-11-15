@@ -29,6 +29,11 @@ PROJECTS = [
 ]
 
 INK, PAPER, MUTED, OCHRE = '#1b2440', '#fbf9f4', '#4a5068', '#b9731a'
+EDGE, CHIP_INK = '#d8d2c4', '#10224f'
+# On GitHub's dark theme a cream label glares against the black page: the labels become night-blue
+# panels with a gold fillet, like the project panels inside the portfolio's painting.
+DARK = {PAPER: '#0d1c47', EDGE: '#c79a3e', INK: '#f6d66b', MUTED: '#d3dbe8', OCHRE: '#8fd0c4'}
+THEMED = ['tableau'] + [f'cartel-{i:02d}' for i in range(1, 7)]
 SERIF = "Georgia, 'Times New Roman', serif"
 # The Great Bear, as placed in the portfolio: x from -1 to 1, y from 0 (horizon) to 1, size.
 STARS = [(-0.62, 0.62, 1.0), (-0.4, 0.8, 1.1), (-0.17, 0.77, 1.0), (0.05, 0.65, 1.15), (0.1, 0.44, 1.0),
@@ -257,7 +262,7 @@ def frame(x, y, w, h, th=46):
 
 def label(x, y, w, h):
     return (f'<rect x="{x + 2}" y="{y + 3}" width="{w}" height="{h}" fill="#000000" fill-opacity=".16"/>'
-            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{PAPER}" stroke="#d8d2c4"/>')
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{PAPER}" stroke="{EDGE}"/>')
 
 
 def hero():
@@ -288,7 +293,7 @@ def cartel(index, project):
             + text(x, 62, project['name'], 23, weight=600, style='italic')
             + ''.join(text(x, 84 + i * 17, line, 13.5, MUTED) for i, line in enumerate(lines))
             + f'<ellipse cx="{n(x + chip/2)}" cy="{h - 25}" rx="{n(chip/2)}" ry="10" fill="#e0a12c" transform="rotate(-2 {n(x + chip/2)} {h - 25})"/>'
-            + text(x + chip/2, h - 20.8, project['lang'], 12, weight=600, anchor='middle')
+            + text(x + chip/2, h - 20.8, project['lang'], 12, CHIP_INK, weight=600, anchor='middle')
             + text(w - 22, h - 20.8, 'open the repository →', 12.5, MUTED, style='italic', anchor='end'))
     return svg(w, h, f'{project["name"]}, museum label',
                f'Museum label number {index}, {project["place"]}: {project["name"]}. {project["text"]} Written in {project["lang"]}.', body)
@@ -333,7 +338,11 @@ def activity(data):
 
 def readme():
     def image(name, alt, width='960'):
-        return f'<img src="./assets/session/{name}.svg" width="{width}" alt="{html.escape(alt)}">'
+        img = f'<img src="./assets/session/{name}.svg" width="{width}" alt="{html.escape(alt)}">'
+        if name not in THEMED:
+            return img
+        return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/{name}-dark.svg">'
+                f'{img}</picture>')
     painting = image('tableau', 'valthvn. A gilded frame holds an animated night scene after Van Gogh’s Starry Night Over the Rhône. '
                                 'Museum label: valthvn, Portfolio, 2026. Vibe coder: web apps, tools and APIs. Build. Learn. Iterate.')
     if PORTFOLIO_URL:
@@ -380,6 +389,11 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     assets = {'tableau': hero(), 'activity': activity(data)}
     assets.update((f'cartel-{i:02d}', cartel(i, p)) for i, p in enumerate(PROJECTS, 1))
+    for name in THEMED:
+        body = assets[name]
+        for light, dark in DARK.items():
+            body = body.replace(light, dark)
+        assets[f'{name}-dark'] = body
     for stale in OUT.glob('*.svg'):
         if stale.stem not in assets:
             stale.unlink()
