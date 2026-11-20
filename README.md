@@ -1,13 +1,13 @@
-<!-- VALTHVN / SESSION 006 -->
+<!-- VALTHVN / SESSION 005 -->
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/tableau-dark.svg"><img src="./assets/session/tableau.svg" width="960" alt="valthvn. A gilded frame holds an animated night scene after Van Gogh’s Starry Night Over the Rhône. Museum label: valthvn, Portfolio, 2026. Vibe coder: web apps, tools and APIs. Build. Learn. Iterate."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/boot.svg"><img src="./assets/session/boot-light.svg" width="960" alt="VALTHVN. Animated monochrome terminal and ASCII portrait. Valentin / valthvn — vibe coder, building web applications, tools and APIs. Build. Learn. Iterate."></picture>
 
-<a href="https://github.com/valthvn/GoodByeFirewall"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/cartel-01-dark.svg"><img src="./assets/session/cartel-01.svg" width="49%" alt="Open the GoodByeFirewall repository"></picture></a> <a href="https://github.com/valthvn/Mint"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/cartel-02-dark.svg"><img src="./assets/session/cartel-02.svg" width="49%" alt="Open the Mint repository"></picture></a><br>
-<a href="https://github.com/valthvn/trouve-ton-theatre-nantes"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/cartel-03-dark.svg"><img src="./assets/session/cartel-03.svg" width="49%" alt="Open the Trouve ton théâtre Nantes repository"></picture></a> <a href="https://github.com/valthvn/SkyHands"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/cartel-04-dark.svg"><img src="./assets/session/cartel-04.svg" width="49%" alt="Open the SkyHands repository"></picture></a><br>
-<a href="https://github.com/valthvn/dsh-local-voice"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/cartel-05-dark.svg"><img src="./assets/session/cartel-05.svg" width="49%" alt="Open the dsh-local-voice repository"></picture></a> <a href="https://github.com/valthvn/animated-terminal-profile"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/cartel-06-dark.svg"><img src="./assets/session/cartel-06.svg" width="49%" alt="Open the animated-terminal-profile repository"></picture></a><br>
+<a href="https://github.com/valthvn/Mint"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/project-01.svg"><img src="./assets/session/project-01-light.svg" width="960" alt="Open Mint repository"></picture></a><br>
+<a href="https://github.com/valthvn/ValthvnQuota"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/project-02.svg"><img src="./assets/session/project-02-light.svg" width="960" alt="Open ValthvnQuota repository"></picture></a><br>
+<a href="https://github.com/valthvn/SkyHands"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/project-03.svg"><img src="./assets/session/project-03-light.svg" width="960" alt="Open SkyHands repository"></picture></a><br>
 
 <details>
-<summary><em>The studio</em> — stack</summary>
+<summary><code>~ $ cat stack.json</code></summary>
 
 ```json
 {
@@ -22,13 +22,13 @@
 
 <br>
 
-<img src="./assets/session/activity.svg" width="960" alt="The lights of Arles: a painted night river where each light on the far shore is one of the last 90 days, and each reflection is as long as that day’s real GitHub contribution count. Refreshed daily.">
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/session/activity.svg"><img src="./assets/session/activity-light.svg" width="960" alt="Monochrome GitHub contribution candles: 90 daily candles based on rolling seven-day totals, actual daily volumes, and totals over 365 and 90 observed days. Filled candles rise; hollow candles fall."></picture>
 
 <details>
-<summary><em>Visitor’s guide</em></summary>
+<summary><code>~ $ help</code></summary>
 
-**The painting**: the profile is one room of a museum; the picture is the portfolio.
-**The labels**: each project hangs under an element of the scene; click a label to open its repository.
-**The lights of Arles**: real public contributions, one light per day, refreshed daily.
+`projects/` — click a repository row above.  
+`stack.json` — expand the toolbox.  
+`activity.log` — real public contribution candles, refreshed daily.
 
 </details>
